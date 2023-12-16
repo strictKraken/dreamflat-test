@@ -18,13 +18,13 @@ const handleChange = () => {
 const handleClickSort = () => {
   if (sortType.value === 0) sortType.value = 1;
   if (sortType.value === 1) sortType.value = 2;
-  else sortType.value = 2;
-  store.commit("setFilter", sortType.value);
+  else sortType.value = 1;
+  store.commit("setSort", sortType.value);
 };
 </script>
 
 <template>
-  <div>
+  <div class="wrapper">
     <a-select
       v-model:value="valueSelect"
       mode="tags"
@@ -37,4 +37,10 @@ const handleClickSort = () => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.wrapper {
+  padding: 1em;
+  gap: 1em;
+  display: flex;
+}
+</style>

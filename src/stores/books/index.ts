@@ -1,4 +1,6 @@
 import data from "@/mock/data.json";
+import { convertData } from "./helpers";
+import type { Book } from "@/components/Books/type";
 
 const bookStore = {
   state: () => ({
@@ -36,23 +38,27 @@ const bookStore = {
   },
   actions: {
     fetchBooks({ commit }) {
-      commit("set", data);
+      const response: any[] = data;
+      const dataConverted = convertData(response);
+      commit("set", dataConverted);
     }
   },
   getters: {
     getBooks(state) {
-      const { selectedGenres, sort } = state;
-      return state.books
-        .filter((item) => {
-          if (selectedGenres.length === 0) return true;
-          return selectedGenres.includes(item.genre);
-        })
-        .sort((a, b) => {
-          // console.log('sort', a,b)
-          if (sort === 0) return 0;
-          if (sort === 1) return a - b;
-          if (sort === 2) return b - a;
-        });
+      const { selectedGenres, sort, books } = state;
+
+      const sortedArray = [...books].sort((a: Book, b: Book) => {
+        if (!a.publishedDate) return 1;
+        if (!b.publishedDate) return -1;
+        if (sort === 1) return b.publishedDate.getTime() - a.publishedDate.getTime();
+        if (sort === 2) return a.publishedDate.getTime() - b.publishedDate.getTime();
+        return 0;
+      });
+
+      return sortedArray.filter((item) => {
+        if (selectedGenres.length === 0) return true;
+        return selectedGenres.includes(item.genre);
+      });
     }
   }
 };
