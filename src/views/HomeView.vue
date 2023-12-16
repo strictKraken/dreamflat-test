@@ -1,5 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onBeforeMount } from "vue";
+import { useStore } from "vuex";
+import { BookList, FilterPanel} from "@/components/Books";
+
+onBeforeMount(() => {
+  useStore().dispatch("fetchBooks");
+});
+</script>
 
 <template>
-  <main>main page</main>
+  <main>
+    <FilterPanel/>
+    <BookList />
+  </main>
 </template>
