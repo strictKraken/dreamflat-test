@@ -10,7 +10,8 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
-    base: env.BASE_URL,
+    // base: env.BASE_URL,
+    base: "/dreamflat-test/",
     plugins: [
       // analyzer(),
       vue(),
