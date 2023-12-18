@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/stores";
 
 const store = useStore();
 const genres = computed(() => store.state.bookStore.genres);

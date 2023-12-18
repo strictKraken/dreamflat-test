@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeMount } from "vue";
-import { useStore } from "vuex";
+import { useStore } from "@/stores";
 import { BookList, FilterPanel } from "@/components/Books";
 
 onBeforeMount(() => {
